@@ -33,31 +33,39 @@ function displayBooks() {
     }
 }
 
-function addTableRow() {
+function addTableRow(bookObj) {
     const newRow = document.createElement('tr');
 
-    for (const bookObj of library) {
-        const book = bookObj.book;
+    // Loop through each book in the library
+    const book = bookObj.book; // Access the actual book object
 
-        const titleCell = document.createElement('td');
-        titleCell.textContent = book.title;
+    // Create table cells for each property of the book
+    const titleCell = document.createElement('td');
+    titleCell.textContent = book.title; // Set the title text
 
-        const authorCell = document.createElement('td');
-        authorCell.textContent = book.author;
+    const authorCell = document.createElement('td');
+    authorCell.textContent = book.author; // Set the author text
 
-        const pagesCell = document.createElement('td');
-        pagesCell.textContent = book.pages;
+    const pagesCell = document.createElement('td');
+    pagesCell.textContent = book.pages; // Set the pages text
 
-        const readCell = document.createElement('td');
-        readCell.textContent = book.read ? 'Yes' : 'No';
+    const readCell = document.createElement('td');
+    readCell.textContent = book.read ? 'Yes' : 'No'; // Set the read status
 
-        newRow.appendChild(titleCell);
-        newRow.appendChild(authorCell);
-        newRow.appendChild(pagesCell);
-        newRow.appendChild(readCell);
-    }
+    // Append the cells to the row
+    newRow.appendChild(titleCell);
+    newRow.appendChild(authorCell);
+    newRow.appendChild(pagesCell);
+    newRow.appendChild(readCell);
 
+    // Append the row to the table body
     tbody.appendChild(newRow);
 }
 
-addTableRow();
+function displayTable() {
+    for (const bookObj of library) {
+        addTableRow(bookObj);
+    }
+}
+
+displayTable();
