@@ -1,4 +1,11 @@
 const tbody = document.getElementById('table-body');
+const dialog = document.getElementById('book-dialog');
+const addBookBtn = document.getElementById('add-book-btn');
+const bookForm = document.getElementById('book-form');
+const cancelBtn = document.getElementById('cancel-btn');
+const submitBtn = document.getElementById('submit-btn');
+
+
 
 const library = [];
 
@@ -22,10 +29,10 @@ function addBookToLibrary(title, author, pages, read) {
     library.push(newBook);
 }
 
-addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 295, true);
-addBookToLibrary('The Martian', 'Andy Weir', 300, true);
-addBookToLibrary('The Queen\'s Gambit', 'Walter Tevis', 400, true);
-addBookToLibrary('The Road', 'Cormac McCarthy', 500, false);
+// addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 295, true);
+// addBookToLibrary('The Martian', 'Andy Weir', 300, true);
+// addBookToLibrary('The Queen\'s Gambit', 'Walter Tevis', 400, true);
+// addBookToLibrary('The Road', 'Cormac McCarthy', 500, false);
 
 function displayBooks() {
     for (const book of library) {
@@ -35,30 +42,25 @@ function displayBooks() {
 
 function addTableRow(bookObj) {
     const newRow = document.createElement('tr');
+    const book = bookObj.book;
 
-    // Loop through each book in the library
-    const book = bookObj.book; // Access the actual book object
-
-    // Create table cells for each property of the book
     const titleCell = document.createElement('td');
-    titleCell.textContent = book.title; // Set the title text
+    titleCell.textContent = book.title;
 
     const authorCell = document.createElement('td');
-    authorCell.textContent = book.author; // Set the author text
+    authorCell.textContent = book.author;
 
     const pagesCell = document.createElement('td');
-    pagesCell.textContent = book.pages; // Set the pages text
+    pagesCell.textContent = book.pages;
 
     const readCell = document.createElement('td');
-    readCell.textContent = book.read ? 'Yes' : 'No'; // Set the read status
+    readCell.textContent = book.read ? 'Yes' : 'No';
 
-    // Append the cells to the row
     newRow.appendChild(titleCell);
     newRow.appendChild(authorCell);
     newRow.appendChild(pagesCell);
     newRow.appendChild(readCell);
 
-    // Append the row to the table body
     tbody.appendChild(newRow);
 }
 
@@ -68,4 +70,24 @@ function displayTable() {
     }
 }
 
-displayTable();
+addBookBtn.addEventListener('click', () => {
+    dialog.showModal();
+});
+
+cancelBtn.addEventListener('click', () => {
+    dialog.close();
+});
+
+bookForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const title = bookForm.title.value;
+    const author = bookForm.author.value;
+    const pages = parseInt(bookForm.pages.value);
+    const read = bookForm.read.value === 'true';
+
+    addBookToLibrary(title, author, pages, read);
+    displayTable();
+    bookForm.reset();
+    dialog.close();
+});
