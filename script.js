@@ -34,12 +34,6 @@ function addBookToLibrary(title, author, pages, read) {
 // addBookToLibrary('The Queen\'s Gambit', 'Walter Tevis', 400, true);
 // addBookToLibrary('The Road', 'Cormac McCarthy', 500, false);
 
-function displayBooks() {
-    for (const book of library) {
-        console.log(book);
-    }
-}
-
 function addTableRow(bookObj) {
     const newRow = document.createElement('tr');
     const book = bookObj.book;
@@ -65,9 +59,7 @@ function addTableRow(bookObj) {
 }
 
 function displayTable() {
-    for (const bookObj of library) {
-        addTableRow(bookObj);
-    }
+    addTableRow(library.at(-1));
 }
 
 addBookBtn.addEventListener('click', () => {

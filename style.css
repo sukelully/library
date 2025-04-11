@@ -58,4 +58,5 @@ td {
 
 th, td {
   padding: 1rem;
+  min-width: 5em;
 }
