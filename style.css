@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
 body {
@@ -15,9 +16,17 @@ body {
   gap: 1rem;
 }
 
+#library-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
 #add-book-btn {
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  width: 8rem;
 }
 
 dialog {
@@ -43,6 +52,16 @@ dialog {
   text-align: center;
 }
 
+.remove-btn {
+  background-color: palevioletred;
+  color: white;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  padding: 1rem;
+}
+
 menu {
   display: flex;
   justify-content: center;
@@ -54,9 +73,11 @@ th,
 td {
   border: 1px solid black;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
-th, td {
-  padding: 1rem;
-  min-width: 5em;
+th,
+td {
+  min-width: 8rem;
+  text-align: center;
 }

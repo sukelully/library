@@ -5,8 +5,6 @@ const bookForm = document.getElementById('book-form');
 const cancelBtn = document.getElementById('cancel-btn');
 const submitBtn = document.getElementById('submit-btn');
 
-
-
 const library = [];
 
 function Book(title, author, pages, read) {
@@ -29,14 +27,16 @@ function addBookToLibrary(title, author, pages, read) {
     library.push(newBook);
 }
 
-// addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 295, true);
-// addBookToLibrary('The Martian', 'Andy Weir', 300, true);
-// addBookToLibrary('The Queen\'s Gambit', 'Walter Tevis', 400, true);
-// addBookToLibrary('The Road', 'Cormac McCarthy', 500, false);
+addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 295, true);
+addBookToLibrary('The Martian', 'Andy Weir', 300, true);
+addBookToLibrary('The Queen\'s Gambit', 'Walter Tevis', 400, true);
+addBookToLibrary('The Road', 'Cormac McCarthy', 500, false);
 
 function addTableRow(bookObj) {
     const newRow = document.createElement('tr');
     const book = bookObj.book;
+
+    newRow.setAttribute('data-index-number', `${bookObj.id}`)
 
     const titleCell = document.createElement('td');
     titleCell.textContent = book.title;
@@ -50,12 +50,31 @@ function addTableRow(bookObj) {
     const readCell = document.createElement('td');
     readCell.textContent = book.read ? 'Yes' : 'No';
 
+    const removeBtn = document.createElement('button');
+    removeBtn.textContent = 'Remove Book';
+    removeBtn.classList.add('remove-btn');
+    removeBtn.setAttribute('id', `${bookObj.id}`);
+    removeBtn.addEventListener('click', () => {
+        newRow.remove()
+    });
+    
+    const removeBookCell = document.createElement('td');
+    removeBookCell.appendChild(removeBtn);
+
+    const changeReadStatusCell = document.createElement('td');
+
     newRow.appendChild(titleCell);
     newRow.appendChild(authorCell);
     newRow.appendChild(pagesCell);
     newRow.appendChild(readCell);
+    newRow.appendChild(removeBookCell);
+    newRow.appendChild(changeReadStatusCell);
 
     tbody.appendChild(newRow);
+}
+
+for (const book of library) {
+    addTableRow(book);
 }
 
 function displayTable() {
