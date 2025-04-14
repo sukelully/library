@@ -56,12 +56,21 @@ function addTableRow(bookObj) {
     removeBtn.setAttribute('id', `${bookObj.id}`);
     removeBtn.addEventListener('click', () => {
         newRow.remove()
+
+        const bookIndex = library.findIndex(book => book.id === bookObj.id);
+        if (bookIndex !== -1) {
+            library.splice(bookIndex, 1);
+        }
     });
     
     const removeBookCell = document.createElement('td');
     removeBookCell.appendChild(removeBtn);
 
+    const changeReadStatusBtn = document.createElement('button');
+
     const changeReadStatusCell = document.createElement('td');
+    changeReadStatusCell.appendChild(changeReadStatusBtn);
+
 
     newRow.appendChild(titleCell);
     newRow.appendChild(authorCell);
