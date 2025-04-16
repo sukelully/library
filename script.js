@@ -27,10 +27,11 @@ function addBookToLibrary(title, author, pages, read) {
     library.push(newBook);
 }
 
-addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 295, true);
-addBookToLibrary('The Martian', 'Andy Weir', 300, true);
-addBookToLibrary('The Queen\'s Gambit', 'Walter Tevis', 400, true);
-addBookToLibrary('The Road', 'Cormac McCarthy', 500, false);
+// Test books
+// addBookToLibrary('The Hobbit', 'J.R.R. Tolkien', 295, true);
+// addBookToLibrary('The Martian', 'Andy Weir', 300, true);
+// addBookToLibrary('The Queen\'s Gambit', 'Walter Tevis', 400, true);
+// addBookToLibrary('The Road', 'Cormac McCarthy', 500, false);
 
 function addTableRow(bookObj) {
     const newRow = document.createElement('tr');
@@ -77,11 +78,8 @@ function addTableRow(bookObj) {
         }
     });
 
-
-
     const changeReadStatusCell = document.createElement('td');
     changeReadStatusCell.appendChild(changeReadStatusBtn);
-
 
     newRow.appendChild(titleCell);
     newRow.appendChild(authorCell);
@@ -91,14 +89,6 @@ function addTableRow(bookObj) {
     newRow.appendChild(changeReadStatusCell);
 
     tbody.appendChild(newRow);
-}
-
-function displayBook() {
-    
-}
-
-for (const book of library) {
-    addTableRow(book);
 }
 
 function displayTable() {
@@ -130,3 +120,5 @@ bookForm.addEventListener('submit', (e) => {
     bookForm.reset();
     dialog.close();
 });
+
+displayTable();
