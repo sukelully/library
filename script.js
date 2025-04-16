@@ -35,6 +35,7 @@ addBookToLibrary('The Road', 'Cormac McCarthy', 500, false);
 function addTableRow(bookObj) {
     const newRow = document.createElement('tr');
     const book = bookObj.book;
+    const bookIndex = library.findIndex(book => book.id === bookObj.id);
 
     newRow.setAttribute('data-index-number', `${bookObj.id}`)
 
@@ -53,11 +54,10 @@ function addTableRow(bookObj) {
     const removeBtn = document.createElement('button');
     removeBtn.textContent = 'Remove Book';
     removeBtn.classList.add('remove-btn');
-    removeBtn.setAttribute('id', `${bookObj.id}`);
+
     removeBtn.addEventListener('click', () => {
         newRow.remove()
 
-        const bookIndex = library.findIndex(book => book.id === bookObj.id);
         if (bookIndex !== -1) {
             library.splice(bookIndex, 1);
         }
@@ -67,6 +67,17 @@ function addTableRow(bookObj) {
     removeBookCell.appendChild(removeBtn);
 
     const changeReadStatusBtn = document.createElement('button');
+    changeReadStatusBtn.textContent = 'Change Read Status';
+    changeReadStatusBtn.classList.add('change-read-status-btn');
+    changeReadStatusBtn.addEventListener('click', () => {
+        if (bookIndex !== -1) {
+            book.read = !book.read;
+            readCell.textContent = book.read ? 'Yes' : 'No';
+            displayTable();
+        }
+    });
+
+
 
     const changeReadStatusCell = document.createElement('td');
     changeReadStatusCell.appendChild(changeReadStatusBtn);
@@ -82,12 +93,20 @@ function addTableRow(bookObj) {
     tbody.appendChild(newRow);
 }
 
+function displayBook() {
+    
+}
+
 for (const book of library) {
     addTableRow(book);
 }
 
 function displayTable() {
-    addTableRow(library.at(-1));
+    tbody.replaceChildren();
+
+    for (book of library) {
+        addTableRow(book);
+    }
 }
 
 addBookBtn.addEventListener('click', () => {
